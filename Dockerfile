@@ -11,14 +11,10 @@ RUN apt-get update \
     pkg-config \
     python \
   && cd /opt \
-  && git clone https://github.com/ether/etherpad-lite.git etherpad
-
-RUN cd /opt/etherpad \
+  && git clone https://github.com/ether/etherpad-lite.git etherpad \
+  && cd etherpad \
   && npm install mongodb \
   && bin/installDeps.sh
-
-# Add conf files
-ADD settings.json /opt/etherpad/default.settings.json
 
 WORKDIR /opt/etherpad
 CMD ["node", "node_modules/ep_etherpad-lite/node/server.js"]
